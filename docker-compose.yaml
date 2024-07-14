@@ -1,0 +1,49 @@
+services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: nginx
+    ports:
+      - "8084:80"
+
+  servidor1:
+    build:
+      context: ./servidor_1
+      dockerfile: Dockerfile
+    container_name: server_1
+    ports:
+      - "5001:5000"
+
+  servidor2:
+    build:
+      context: ./servidor_2
+      dockerfile: Dockerfile
+    container_name: server_2
+    ports:
+      - "5002:5000"
+
+  servidor3:
+    build:
+      context: ./servidor_3
+      dockerfile: Dockerfile
+    container_name: server_3
+    ports:
+      - "5003:5000"
+
+  servidor4:
+    build:
+      context: ./servidor_4
+      dockerfile: Dockerfile
+    container_name: server_4
+    ports:
+      - "5004:5000"
+
+  locust:
+    image: locustio/locust:latest
+    container_name: locust_app
+    ports:
+      - "8089:8089"
+    volumes:
+      - C:\Users\Tesis\Documents\Replica_Docker:/mnt/locust
+    command: ["-f", "/mnt/locust/locustfile.py"]
